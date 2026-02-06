@@ -81,8 +81,13 @@ Create a `.env` file in the `back/` directory with necessary configuration.
 
 5. Initialize the database:
 ```bash
-python -c "from db import init_db; init_db()"
+python -m fask --app back run
 ```
+or
+```bash
+flask --app back run
+```
+(Note that you must be outside of "back" directory/folder)
 
 6. Run the server:
 ```bash
