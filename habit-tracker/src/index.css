@@ -1,0 +1,389 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  user-select: none;
+}
+
+.layout-stuff {
+  display: grid;
+  width: 100%;
+  height: 100vh;
+  grid-template-columns: 0.5fr 0.3fr 0.6fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+  padding: 8px;
+  
+}
+
+.layout-stuff > :nth-child(3) {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+}
+
+.layout-stuff > :nth-child(4) {
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.logout {
+  all: unset;
+  background-image: url("/logout_logo.png");
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  z-index: 3;
+  position: absolute;
+  bottom: 1vh;
+  left: 1vh;
+  border-radius: 10px;
+}
+
+.calendar {
+  background-color: rgb(31, 31, 31);
+  border-radius: 15px;
+  height: fit-content;
+  color: white;
+  text-align: center;
+  padding: 10px 5px;
+  font-family: "Michroma", sans-serif;
+  user-select: none;
+}
+
+.calendar .days-of-week {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar .days-of-week div {
+  background-color: rgb(72, 72, 72);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.calendar .days {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 3px 6px;
+  font-family: "Google Sans Code", monospace;
+  font-weight: 550;
+}
+
+.calendar .days .day {
+  background-color: rgb(55, 55, 55);
+  font-size: 32px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.calendar .days .day:hover {
+  background-color: rgb(67, 67, 67);
+}
+
+.calendar .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8vh;
+}
+
+.arrow-right, .arrow-left {
+  width: 8%;
+  filter: invert(); /* to make them white */
+}
+
+.arrow-right:hover, .arrow-left:hover {
+  cursor: pointer;
+}
+
+.arrow-left {
+  rotate: 180deg;
+}
+
+.current-month {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.fade {
+  opacity: 0;
+}
+
+.with-streak {
+  border: 2px solid rgb(28, 98, 28);
+}
+
+.with-note {
+  border: 2px solid rgb(71, 71, 71);
+}
+
+.editing {
+  border-bottom: 2px solid white !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.day-wrapper {
+  position: relative;
+}
+
+.calendar .days .info {
+  position: absolute;
+  background-color: rgb(33, 33, 33);
+  border-radius: 8px;
+  /* padding: 10px; */
+  z-index: 2;
+  transform: translateY(10vh);
+  width: 15vw;
+  min-height: 15vh;
+  height: fit-content;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.calendar .days .info .content {
+  overflow-wrap: break-word;
+  text-align: left;
+  padding: 0 5px;
+  padding-bottom: 10px;
+}
+
+.calendar .days .info .title-container {
+  width: 100%;
+  background-color: rgb(46, 46, 46);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.calendar .days .info .title-container .foir {
+  height: 2vh;
+}
+
+
+
+.user-records {
+  border-radius: 15px;
+  background-color: rgb(31, 31, 31);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-between;
+  padding: 40px 20px;
+}
+
+.user-records p {
+  border-left: 2px solid rgb(155, 155, 155);
+  padding-left: 5px;
+  color: rgb(155, 155, 155);
+  font-family: "Google Sans Code", monospace;
+}
+
+.user-records .counters {
+  color: orange;
+  font-family: "Michroma", sans-serif;
+}
+
+
+
+.day-editor {
+  border-radius: 15px;
+  background-color: rgb(31, 31, 31);
+}
+
+.day-editor form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.day-editor .checkbox {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-self: flex-end;
+}
+
+.day-editor .title {
+  all: unset;
+  font-size: 18px;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  padding: 5px;
+  border-radius: 8px;
+  border: 2px solid rgb(80, 80, 80);
+  transition: border 0.2s ease, border-radius 0.2s ease;
+  align-self: flex-start;
+  margin-left: 5%;
+  margin-bottom: 2px;
+  font-family: "Zain", sans-serif;
+}
+
+.day-editor .title:focus {
+  border: 2px solid rgb(121, 121, 121);
+  border-radius: 15px;
+}
+
+.day-editor .content {
+  all: unset;
+  height: 100%;
+  width: 100%;
+  font-size: 18px;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid rgb(80, 80, 80);
+  transition: border 0.2s ease, border-radius 0.2s ease;
+  font-family: "Zain", sans-serif;
+}
+
+.day-editor .content:focus {
+  border: 2px solid rgb(121, 121, 121);
+  border-radius: 15px;
+}
+
+.day-editor .content-wrapper {
+  height: 65%;
+  width: 90%;
+}
+
+.day-editor .control-buttons {
+  margin-top: 15%;
+  transform: translateY(-50%);
+}
+
+.day-editor button {
+  all: unset;
+  width: 100px;
+  height: 100px; 
+  background-size: cover;
+  border-radius: 20px;
+  cursor: pointer;
+} 
+
+.day-editor .delete {
+  margin-left: 10vw;
+}
+
+.day-editor_cover {
+  position: absolute;
+  width: 42.3vw;
+  height: 98.3vh;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.393);
+  backdrop-filter: blur(2px);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+  z-index: 3;
+}
+
+.map {
+  background-color: rgb(31, 31, 31);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 15px;
+}
+
+
+
+.register, .login {
+  background-color: rgb(31, 31, 31);
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-family: "Zain", sans-serif;
+}
+
+.register form, .login form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.register label, .login label {
+  font-size: 15px;
+}
+
+.register input, .login input {
+  all: unset;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 2px solid rgb(80, 80, 80);
+  background-color: rgb(53, 53, 53);
+  text-align: left;
+  padding: 0 8px;
+  transition: border 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register input:focus, .login input:focus {
+  border: 2px solid rgb(150, 150, 150);
+  background-color: rgb(72, 72, 72);
+  box-shadow: 0 0 10px rgb(68, 68, 68);
+}
+.register button[type="submit"], .login button[type="submit"] {
+  all: unset;
+  background-color: rgb(234, 234, 234);
+  color: black;
+  border-radius: 10px;
+  height: 35px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.register button[type="submit"]:hover, .login button[type="submit"]:hover {
+  box-shadow: 0 0 10px rgb(108, 108, 108);
+}
+
+.register-instead, .login-instead {
+  all: unset;
+  background-color: rgb(234, 234, 234);
+  color: black;
+  border-radius: 100px;
+  width: 10vw;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.register-instead:hover, .login-instead:hover {
+  background-color: rgb(200, 200, 200);
+}
+
+
+.logout {
+  cursor: pointer;
+  user-select: none;
+}
