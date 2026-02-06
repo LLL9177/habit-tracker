@@ -81,11 +81,11 @@ Create a `.env` file in the `back/` directory with necessary configuration.
 
 5. Initialize the database:
 ```bash
-python -m fask --app back run
+python -m fask --app back init-db
 ```
 or
 ```bash
-flask --app back run
+flask --app back init-db
 ```
 (Note that you must be outside of "back" directory/folder)
 
