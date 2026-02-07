@@ -25,7 +25,7 @@ const greetings = [
 ];
 const welcomeMessage = greetings[Math.floor(Math.random()*greetings.length)];
 
-export default function UserRecords({setMessage, calendarData, setCalendarData}) {
+export default function UserRecords({setMessage, calendarData}) {
     const [username, setUsername] = useState('');
     const parsedData = calendarData.length >= 2 ? JSON.parse(calendarData) : '__';
 
@@ -39,7 +39,7 @@ export default function UserRecords({setMessage, calendarData, setCalendarData})
                     setUsername(res.username)
                 }
             })
-    }, [])
+    }, [setMessage])
 
     return (
         <div className="user-records">

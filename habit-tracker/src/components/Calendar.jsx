@@ -64,7 +64,7 @@ export default function Calendar({setMessage, fetchedData, setFetchedData}) {
                     setFetchedData(res.data);
                 }
             }) 
-    }, [])
+    }, [setFetchedData, setMessage])
 
     return (
         <div className="calendar">
@@ -151,8 +151,6 @@ function Day({streak, isStreakAive, title, content, children, date, editing, set
     const [isOpened, setIsOpened] = useState(false);
     const infoRef = useRef(null);
     const setEditingContextValue = useContext(EditingContext);
-    const editingContextValue = useContext(EditingDataContext);
-    const [isEditing, setIsEditing] = useState(false);
     const d = date.split(':')[0];
 
     let editedContent = '';

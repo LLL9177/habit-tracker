@@ -1,7 +1,7 @@
 import Calendar from "./components/Calendar";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Messages from "./components/Messages";
 import fetchData from "./fetchData";
 import DayEditor from "./components/DayEditor";
@@ -20,7 +20,7 @@ const backgrounds = [
 const background = backgrounds[Math.floor(Math.random()*backgrounds.length)];
 
 export default function App() {
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState(null); // message isn't used for now. It will me used in Messages component so like this for now.
   const [editing, setEditing] = useState(null)
   const [calendarData, setCalendarData] = useState([]);
   const [isLoginActive, setIsLoginActive] = useState(false);
@@ -41,7 +41,6 @@ export default function App() {
       <UserRecords 
         setMessage={setMessage}
         calendarData={calendarData}
-        setCalendarData={setCalendarData}
       />
     </>
   );

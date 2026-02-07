@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react"
-import { useContext } from "react";
-import { UserAgentTypeContext } from "../UserAgentType";
+// import { UserAgentTypeContext } from "../UserAgentType";
 
-export default function Messages({ message }) {
-  const [isHidden, setIsHidden] = useState(false);
-  const deviceType = useContext(UserAgentTypeContext);
+// smth new (or not) i learnt (remembered) here is that react is smart. It compares trees after updating state and changes only the ones
+// that differ.
+export default function Messages({ message, setMessage }) {
+  const isHidden = !message;
+  if (isHidden) return null;
 
-  useEffect(() => {
-    setIsHidden(false);
-  }, [message])
-
-  if (!message) return null;
+  // const deviceType = useContext(UserAgentTypeContext);
 
   return (
     <div>
-      <TimerLine setHidden={setIsHidden} />
+      <TimerLine setMessage={setMessage} />
       <p>{message}</p>
     </div>
   );
 }
 
-function TimerLine({ setHidden }) {
+function TimerLine({ setMessage }) {
   const [lineWidth, setLineWidth] = useState(100);
 
   useEffect(() => {
@@ -28,7 +25,7 @@ function TimerLine({ setHidden }) {
       setLineWidth(w => {
         if (w <= 0) {
           clearInterval(interval);
-          setHidden(true);
+          setMessage(null);
           return 0;
         }
         return w - 0.2;
@@ -36,7 +33,7 @@ function TimerLine({ setHidden }) {
     }, 10);
 
     return () => clearInterval(interval);
-  }, [setHidden]);
+  }, [setMessage]);
 
   return (
     <div
